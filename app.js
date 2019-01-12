@@ -3,6 +3,9 @@ const app = express();
 const bodyParser = require("body-parser");
 const request = require("request");
 
+var apiKey = ""; //Here your API key from Mailchimp
+var listID = ""; //Here your list id
+
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static("public"));
@@ -32,10 +35,10 @@ app.post("/", function(req, res){
     var jsonData = JSON.stringify(data);
 
     var options = {
-        url: "https://us20.api.mailchimp.com/3.0/lists/eabf8c33af",
+        url: "https://us20.api.mailchimp.com/3.0/lists/" + listID,
         method: "POST",
         headers: {
-            "Authorization": "anagutjor 905b9afc3d620289f59ea92f519caddd-us20"
+            "Authorization": "anagutjor " + apiKey
         },
         body: jsonData
     }
@@ -62,5 +65,3 @@ app.listen(process.env.PORT || 3000, function(){
     console.log("Server is listening on port 3000");
 })
 
-//API-key 905b9afc3d620289f59ea92f519caddd-us20
-//list-id eabf8c33af
